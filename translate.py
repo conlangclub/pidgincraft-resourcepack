@@ -63,3 +63,5 @@ with open(PACK_MCMETA) as pack_mcmeta_file:
     metadata = json.load(pack_mcmeta_file)
 metadata['pack']['description'] = METADATA_DESC + ' ' + datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d UTC')
 json.dump(metadata, open(PACK_MCMETA, 'w'), indent=2)
+
+print("Finished creating MC translation file")
