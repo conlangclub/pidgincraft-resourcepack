@@ -1,0 +1,26 @@
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: 0 0 * * *
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build resource pack
+        run: ${PWD}/make_resourcepack.sh
+      - name: Set current date as env variable
+        run: echo "NOW=$(date +'%Y-%m-%dT%H%M%S')" >> $GITHUB_ENV
+        shell: bash
+      - name: Create GH release
+        run: gh release create $NOW scc_resourcepack.zip
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
