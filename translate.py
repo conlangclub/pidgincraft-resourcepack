@@ -46,11 +46,9 @@ for [key, translation] in mc_lang_en.items():
     else:
         pidgin_words = []
         for token in translation.split():
-            if (
-                token in dict_eng_pidgin and
-                token not in STOP_WORDS and
-                token[0] != '%'
-            ):
+            if token.startswith("%"): # Minecraft uses tokens starting with % to interpolate values, like tool durability
+                pidgin_words.append(token)
+            elif token in dict_eng_pidgin and token not in STOP_WORDS:
                 pidgin_words.append(dict_eng_pidgin[token])
 
         if len(pidgin_words) > 0:
