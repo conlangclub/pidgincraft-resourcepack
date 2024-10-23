@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "pack_format": 45,
+    "description": "Seattle Conlang Club PidginCraft translation resource pack 2024-10-22"
+  },
+  "language": {
+    "pidgin_scc": {
+      "name": "Seattle Conlang Club PidginCraft pidgin",
+      "region": "Seattle",
+      "bidirectional": false
+    }
+  }
+}
