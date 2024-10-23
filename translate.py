@@ -63,5 +63,5 @@ json.dump(mc_lang_pidgin, open(MC_PIDGIN_FILE_OUT, 'w'), indent=2)
 # Update pack.mcmeta with date of creation
 with open(PACK_MCMETA) as pack_mcmeta_file:
     metadata = json.load(pack_mcmeta_file)
-metadata['pack']['description'] = METADATA_DESC + ' ' + datetime.datetime.now(datetime.UTC).strftime('%Y-%m-%d UTC')
+metadata['pack']['description'] = METADATA_DESC + ' ' + datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d UTC')
 json.dump(metadata, open(PACK_MCMETA, 'w'), indent=2)
