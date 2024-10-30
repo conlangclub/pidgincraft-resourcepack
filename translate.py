@@ -38,7 +38,8 @@ for [key, translation] in mc_lang_en.items():
     if (
         key.startswith('menu.') or
         key.startswith('options.') or
-        key.startswith('pack.')
+        key.startswith('pack.') or
+        key.startswith('chat.')
     ): # do not touch menu/option strings
         mc_lang_pidgin[key] = mc_lang_en[key]
     elif translation in dict_eng_pidgin:
