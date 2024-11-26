@@ -35,8 +35,6 @@ mc_lang_pidgin = {}
 
 for [key, translation] in mc_lang_en.items():
     translation = translation.lower().strip()
-    if translation == "crafting table":
-        print("a")
 
     if (
         key.startswith('menu.') or
@@ -56,7 +54,8 @@ for [key, translation] in mc_lang_en.items():
                 pidgin_words.append(dict_eng_pidgin[token])
 
         if len(pidgin_words) > 0:
-            mc_lang_pidgin[key] = '? ' + ' '.join(random.shuffle(pidgin_words)) + ' ?'
+            random.shuffle(pidgin_words)
+            mc_lang_pidgin[key] = '? ' + ' '.join(pidgin_words) + ' ?'
         else:
             mc_lang_pidgin[key] = '???'
 
