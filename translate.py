@@ -1,6 +1,7 @@
 import csv
 import json
 import datetime
+import random
 
 MC_ENGLISH_FILE = 'en_us.json' # English translation file from minecraft.jar/assets/lang
 VOCAB_CSV = 'vocab.csv'
@@ -55,7 +56,7 @@ for [key, translation] in mc_lang_en.items():
                 pidgin_words.append(dict_eng_pidgin[token])
 
         if len(pidgin_words) > 0:
-            mc_lang_pidgin[key] = '? ' + ' '.join(pidgin_words) + ' ?'
+            mc_lang_pidgin[key] = '? ' + ' '.join(random.shuffle(pidgin_words)) + ' ?'
         else:
             mc_lang_pidgin[key] = '???'
 
