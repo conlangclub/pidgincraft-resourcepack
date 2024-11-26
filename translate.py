@@ -19,7 +19,7 @@ mc_lang_en = json.load(open(MC_ENGLISH_FILE))
 dict_eng_pidgin = {} # eng to pidgin dictionary
 
 for word in csv.DictReader(open(VOCAB_CSV)):
-    for sense in word['English definition'].split(','):
+    for sense in word['English definition'].replace(';', ',').split(','):
         sense = sense.lower().strip()
         if sense not in dict_eng_pidgin:
             dict_eng_pidgin[sense] = word['Pidgin word']
@@ -34,6 +34,8 @@ mc_lang_pidgin = {}
 
 for [key, translation] in mc_lang_en.items():
     translation = translation.lower().strip()
+    if translation == "crafting table":
+        print("a")
 
     if (
         key.startswith('menu.') or
