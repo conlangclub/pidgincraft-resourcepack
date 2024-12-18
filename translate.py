@@ -41,6 +41,7 @@ for [key, translation] in mc_lang_en.items():
         key.startswith('options.') or
         key.startswith('pack.') or
         key.startswith('chat.') or
+        key.startswith('commands.') or
         key.startswith('enchantment.level.')
     ): # do not touch menu/option strings
         mc_lang_pidgin[key] = mc_lang_en[key]
