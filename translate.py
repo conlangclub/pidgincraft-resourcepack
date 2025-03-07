@@ -5,6 +5,7 @@ import random
 
 MC_ENGLISH_FILE = 'en_us.json' # English translation file from minecraft.jar/assets/lang
 VOCAB_CSV = 'vocab.csv'
+PHRASES_CSV = 'phrases.csv'
 RESOURCE_PACK_ROOT = 'scc_resourcepack'
 MC_PIDGIN_FILE_OUT = RESOURCE_PACK_ROOT + '/assets/pidgincraft/lang/pidgin_scc.json'
 
@@ -19,13 +20,19 @@ mc_lang_en = json.load(open(MC_ENGLISH_FILE))
 
 dict_eng_pidgin = {} # eng to pidgin dictionary
 
-for word in csv.DictReader(open(VOCAB_CSV)):
+def add_word(word_entry):
     for sense in word['English definition'].replace(';', ',').split(','):
         sense = sense.lower().strip()
         if sense not in dict_eng_pidgin:
             dict_eng_pidgin[sense] = word['Pidgin word']
         else:
             dict_eng_pidgin[sense] += '/' + word['Pidgin word']
+
+for word in csv.DictReader(open(VOCAB_CSV)):
+    add_word(word)
+
+for word in csv.DictReader(open(PHRASES_CSV)):
+    add_word(word)
 
 del dict_eng_pidgin['?'] # The English translation of an ambiguous pidgin word is always '?'
 
