@@ -6,6 +6,7 @@ import random
 MC_ENGLISH_FILE = 'en_us.json' # English translation file from minecraft.jar/assets/lang
 VOCAB_CSV = 'vocab.csv'
 PHRASES_CSV = 'phrases.csv'
+TRANSLATION_OVERRIDES = 'translation_overrides.json'
 RESOURCE_PACK_ROOT = 'scc_resourcepack'
 MC_PIDGIN_FILE_OUT = RESOURCE_PACK_ROOT + '/assets/pidgincraft/lang/pidgin_scc.json'
 
@@ -42,6 +43,9 @@ mc_lang_pidgin = {}
 
 for [key, translation] in mc_lang_en.items():
     translation = translation.lower().strip()
+    if len(translation) == 0:
+        mc_lang_pidgin[key] = ''
+        continue
 
     if (
         key.startswith('menu.') or
@@ -75,6 +79,12 @@ for [key, translation] in mc_lang_en.items():
         else:
             mc_lang_pidgin[key] = '???'
 
+# If translations are explicitly defined in the overrides file, use those
+overrides = json.load(open(TRANSLATION_OVERRIDES))
+for key, translation in overrides.items():
+    mc_lang_pidgin[key] = translation
+
+# Write translations
 json.dump(mc_lang_pidgin, open(MC_PIDGIN_FILE_OUT, 'w'), indent=2)
 
 # Update pack.mcmeta with date of creation
